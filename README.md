@@ -1,6 +1,6 @@
 # SimpleIOUSB
 
-A single-file library to abstract away the annoyances of IOKit and IOUSB.
+A single-file C library to abstract away the annoyances of IOKit and IOUSB.
 
 ## Author's Note
 
@@ -11,6 +11,18 @@ times, I wanted to finally put something proper together.
 That said, this library is far from feature-complete and only really contains
 abstractions for the things I've needed to do. However, hopefully it can still
 be useful for you.
+
+## Design Goals
+
+Foremost, this library is intended to be simple and easy to use. However, a few
+other things that were in mind when designing this library were:
+
+- keeping the code freestanding, so that this library may be easily dropped
+  into a project and forgotten;
+- providing a pure C API, for maximum portability and so that bindings to other
+  languages may be easily written at a later time; and
+- returning ("bubbling-up") actual IOKit return codes wherever possible, as to
+  not obscure what went wrong if a function fails.
 
 ## Usage
 
