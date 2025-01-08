@@ -42,5 +42,5 @@ or install it to your system.
 
 Copyright © 2022-2025 Jon Palmisciano. All rights reserved.
 
-Licensed the BSD 3-Clause license; the full terms of the license can be found
-in [LICENSE.txt](LICENSE.txt).
+Licensed under the BSD 3-Clause license; the full terms of the license can be
+found in [LICENSE.txt](LICENSE.txt).
