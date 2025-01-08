@@ -6,7 +6,7 @@ option(SI_BUILD_EXAMPLES "Build example applications" NO)
 
 add_library(SimpleIOUSB Source/SimpleIOUSB.c)
 target_compile_features(SimpleIOUSB PRIVATE c_std_99)
-target_compile_options(SimpleIOUSB PRIVATE "-Wall" "-Wextra" "-Wpedantic")
+target_compile_options(SimpleIOUSB PRIVATE "-Wall" "-Wextra" "-Wpedantic" "-Wno-gcc-compat")
 target_include_directories(SimpleIOUSB PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Source)
 target_link_libraries(SimpleIOUSB PUBLIC "-framework CoreFoundation -framework IOKit")
 

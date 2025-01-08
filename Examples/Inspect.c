@@ -1,7 +1,5 @@
 #include "Common.h"
 
-#include <mach/mach_error.h>
-
 #include <stdlib.h>
 
 char const *GetStringDescriptorAlloc(SIClient *client, uint8_t index)
@@ -29,7 +27,7 @@ int DumpInfo(SIClient *client)
     SITransferResult result = SIGetDescriptor(client, kSIDescriptorTypeDevice, 0,
         &device, sizeof(device));
     if (result.error != kIOReturnSuccess || result.length != sizeof(device)) {
-        fprintf(stderr, "Failed to get device descriptor.\n");
+        fprintf(stderr, "Failed to get device descriptor. (%#x)\n", result.error);
         return 0;
     }
 
@@ -54,7 +52,7 @@ int DumpInfo(SIClient *client)
     SIPipeProps pipes[kSIPipesMax];
     IOReturn ret = SIGetAllPipes(client, pipes, &numPipes);
     if (ret != kIOReturnSuccess) {
-        fprintf(stderr, "Failed to get pipes: %s\n", mach_error_string(ret));
+        fprintf(stderr, "Failed to get pipes. (%#x)\n", ret);
         return 0;
     }
 
@@ -76,7 +74,7 @@ int DumpInfo(SIClient *client)
 
         result = SIGetDescriptor(client, kSIDescriptorTypeConfig, i, &buf, sizeof(buf));
         if (result.error != kIOReturnSuccess) {
-            fprintf(stderr, "Failed to get configuration %d descriptor.\n", i);
+            fprintf(stderr, "Failed to get configuration %d descriptor. (%#x)\n", i, result.error);
             return 0;
         }
 
@@ -123,7 +121,7 @@ int main(int argc, char const **argv)
     SIClient *client = SIClientCreate();
     IOReturn ret = SIConnect(client, kUSBVendorIDApple, kUSBProductIDAppleRecovery);
     if (ret != kIOReturnSuccess) {
-        fprintf(stderr, "Failed to connect: %s\n", mach_error_string(ret));
+        fprintf(stderr, "Failed to connect. (%#x)\n", ret);
         return EXIT_FAILURE;
     }
 
